@@ -1,0 +1,107 @@
+<!-- ngModel -->
+<input type="text" [(ngModel)] = "title">
+<br>
+<input type = "boolean" [(ngModel)] = "num">
+
+<!-- ngIf -->
+<h1 *ngIf="title == 'pooja'">{{title}}</h1>
+
+<!-- ngIf (if and else)-->
+<h1 *ngIf="title == 'pooja'; else ifelse">Hii {{title}}! welcome</h1>
+
+<ng-template #ifelse>
+    <h1>Hii </h1>
+</ng-template>
+
+<!-- ngIf (if ,elseif and else)-->
+<h1 *ngIf="title == 'pooja'; else elseif">if cond true</h1>
+
+<ng-template #elseif>
+    <h1 *ngIf="num == true; else elsecond">Else -if cond true </h1>
+    <ng-template #elsecond>
+        <h1>else cond true</h1>
+    </ng-template>
+</ng-template>
+
+<!-- ngIf (then and else)-->
+<ng-template *ngIf="num; then ifCond; else elseIfCond"></ng-template>
+<ng-template #ifCond>
+    <p>You are admin</p>
+</ng-template>
+<ng-template #elseIfCond>
+    <p>You are user</p>
+</ng-template>
+
+<!-- ngFor -->
+<div *ngFor="let items of properties">
+    {{items.name}}
+</div>
+
+<!-- ngFor with index -->
+<div *ngFor="let items of properties;let i = index">
+    {{items.name}}{{i}}
+</div>
+
+<!-- ngClass -->
+<p [ngClass]="{'class1':true,'class2':false}">class</p>
+<!-- ngClass with condition -->
+<p [ngClass]="{'class1': num==true,'class2': num==false}">class2</p>
+
+<!-- ngSwitch -->
+<ul [ngSwitch] = "title">
+    <li *ngSwitchCase="'first'">First</li>
+    <li *ngSwitchCase="'second'">Second</li>
+    <li *ngSwitchCase="'third'">Third</li>
+    <li *ngSwitchDefault>Default : {{title}}</li>
+</ul>
+
+<!-- ngStyle -->
+<p [ngStyle]="{'color': 'red'}">red</p>
+
+<!-- ngStyle with condition -->
+<p [ngStyle]="{'color': title=='pooja'? 'green':'brown'}">style</p>
+
+<!-- routing -->
+<!-- Routing Start -->
+
+<!-- components -->
+<!-- Components Start -->
+<!-- Need to create component  `ng generate component <COMPONENT_NAME>`-->
+
+<!-- forms -->
+<!-- template driven form in component1-->
+<a [routerLink]="'/component1'">component1 Template Driven Form</a>
+<br>
+<!-- reactive form in component2-->
+<a routerLink="component2">component2 Reactive Form with Validation</a>
+<!-- Components End -->
+<br>
+
+<!-- Event Binding by using click event -->
+<a (click)="openModal(content)" class="text-right">Open Modal</a>
+<!-- Modal -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-dynamic-template-driven-form [dynamicForm]="test_data"  (Form)="receiveMessage($event,modal)" (methods)="testMethod($event)"></app-dynamic-template-driven-form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+  </ng-template>
+
+  <app-dynamic-table [table_data]="table_data" (methods)="testMethod($event)"></app-dynamic-table>
+
+<router-outlet></router-outlet>
+<!-- Routing End -->
+
+<!-- Http REST Call -->
+<!-- Need to create service  `ng generate service <SERVICE_NAME>`
+Need to import `HttpClient` from '@angular/common/http' in `<SERVICE_NAME>.service.ts` and in `<COMPONENT_NAME>.component.ts`
+In `<SERVICE_NAME>.service.ts`  need to write method which returns http call response
+In `<COMPONENT_NAME>.component.ts` call that method  -->

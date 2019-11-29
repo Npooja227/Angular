@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+.basic-container {
+    padding: 30px;
+  }
+  .dropdown-toggle::after {
+    display:none;
+  }
+  .pointer{
+    cursor: pointer;
+  }
+  .modal-dialog{
+    height: 100%;
+    margin: 0px auto;
+    margin-right: 0px;
+  }
+  .modal-content{
+    height: 100%;
+  }
